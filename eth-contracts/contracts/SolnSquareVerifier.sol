@@ -4,13 +4,13 @@ import "./Oraclize.sol";
 import "./ERC721Mintable.sol";
 
 // TODO define a contract call to the zokrates generated solidity contract <Verifier> or <renamedVerifier>
-import "./verifier.sol";
+import "./SquareVerifier.sol";
 
-contract VerifierZn is Verifier {
+contract VerifierZn is SquareVerifier {
     
     event VerifiedZnEvent (address owner);
 
-    function verifyTx(
+    function verifyZnTx(
         address owner,
         uint[2] memory a,
         uint[2][2] memory b,
@@ -31,11 +31,12 @@ contract VerifierZn is Verifier {
     }
 }
 
+
 // TODO define another contract named SolnSquareVerifier that inherits from your ERC721Mintable class
-contract SolnSquareVerifier is usingOraclize, ERC721MintableComplete{
+contract SolnSquareVerifier is ERC721MintableComplete {
     using SafeMath for uint256;
 
-    VerifierZn private verifierZn;
+    SquareVerifier public verifierContract;
 
     // TODO define a solutions struct that can hold an index & an address
     struct Solution {
@@ -55,10 +56,9 @@ contract SolnSquareVerifier is usingOraclize, ERC721MintableComplete{
     event AddedSolutionEvent(address addressSolution);
 
     constructor(
-        address verifierZnAddress
-    ) 
-    public {
-        verifierZn = VerifierZn(verifierZnAddress);
+        address verifierAddress
+    ) public {
+        verifierContract = SquareVerifier(verifierAddress);
     }
 
     function _getSolutionKey(
@@ -68,7 +68,7 @@ contract SolnSquareVerifier is usingOraclize, ERC721MintableComplete{
         uint[2] memory input
     )  
     private 
-    view 
+    pure 
     returns (bytes32){
         return keccak256(abi.encodePacked(a,b,c,input));
     }
@@ -112,8 +112,8 @@ contract SolnSquareVerifier is usingOraclize, ERC721MintableComplete{
                 uint2str(_mapSolution[solutionKey].index)));
 
         //  - make sure you handle metadata as well as tokenSuplly
-        require(verifierZn.verifyTx(
-                owner,
+        require(verifierContract.verifyTx(
+                //owner,
                 a,
                 b,
                 c,

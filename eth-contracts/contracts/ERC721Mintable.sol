@@ -608,7 +608,9 @@ contract ERC721MintableComplete is ERC721Metadata {
     ERC721Metadata 
     (name, symbol, "https://s3-us-west-2.amazonaws.com/udacity-blockchain/capstone/")
     public
-    {}
+    {
+        
+    }
     //  2) create a public mint() that does the following:
     //      -can only be executed by the contract owner
     //      -takes in a 'to' address, tokenId, and tokenURI as parameters

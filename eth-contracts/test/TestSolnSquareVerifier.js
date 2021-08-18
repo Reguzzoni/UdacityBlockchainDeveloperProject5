@@ -1,30 +1,35 @@
-var SolInSquareVerifier = artifacts.require('./SolInSquareVerifier.sol');
-var Verifier = artifacts.require('./verifier.sol');
+var SolnSquareVerifier = artifacts.require('./SolnSquareVerifier.sol');
+var Verifier = artifacts.require('./SquareVerifier.sol');
 var Proof = require("../zokratesInfo/proof.json");
 
-contract('TestSolInSquareVerifier', accounts => {
+contract('TestSolnSquareVerifier', accounts => {
     const account_one = accounts[0];
     const account_two = accounts[1];
     const tokenId_one = 1;
 
-    let verifierContract;
+    
 
     describe('match spec', function () {
         beforeEach(async function () {
-            console.log("start new contract Verifier");
+            let verifierContract;
+
+            console.log(
+                "start new contract Verifier");
             verifierContract = await Verifier.new({
                 from: account_one
             });
-            console.log("start new contract Verifier");
+            console.log("Finished new contract Verifier");
 
-            console.log("start new contract SolInSquareVerifier");
-            this.contract = await SolInSquareVerifier.new(
+            console.log(
+                "start new contract SolnSquareVerifier with verifier ",  
+                verifierContract.address);
+
+            this.contract = await SolnSquareVerifier.new(
                 verifierContract.address, {
                     from: account_one
                 }
             );
-            
-            console.log("finished new contract SolInSquareVerifier");
+            console.log("finished new contract SolnSquareVerifier");
         });
 
         // Test if a new solution can be added for contract - SolnSquareVerifier
@@ -42,7 +47,7 @@ contract('TestSolInSquareVerifier', accounts => {
                     uint[2] memory inputs
                 )
                 */
-                await this.solInSquareVerifierContact.mint(
+                await this.solnSquareVerifierContact.mint(
                     account_two,
                     tokenId_one,
                     Proof.proof.a,
