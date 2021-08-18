@@ -70,3 +70,4 @@ typings/
 
 #ignore secret key
 secret_properties.yml
+node_modules

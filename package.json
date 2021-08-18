@@ -11,12 +11,17 @@
   "author": "pk <pkrasam@gmail.com> (https://ipfs.infura.io/ipfs/QmSXiR9Khm3yo1J67nUopvVBxFJ8YGN2fUGZ34Etr3m92x/)",
   "license": "MIT",
   "devDependencies": {
+    "@nomiclabs/buidler": "^1.4.8",
     "lite-server": "2.4.0"
   },
   "dependencies": {
+    "@truffle/hdwallet-provider": "^1.4.3",
+    "js-yaml": "^4.1.0",
     "openzeppelin-solidity": "^2.2.0",
     "solc": "^0.5.2",
     "solc-js": "^0.5.2",
-    "js-yaml": "^4.1.0"
+    "truffle": "5.1.29",
+    "truffle-core": "^5.0.34",
+    "truffle-hdwallet-provider": "^1.0.17"
   }
 }

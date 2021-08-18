@@ -364,11 +364,15 @@ contract usingOraclize {
         return false;
     }
 
-    function __callback(bytes32 _myid, string memory _result) public {
+    function __callback(bytes32 _myid, string memory _result) 
+    public
+    pure {
         __callback(_myid, _result, new bytes(0));
     }
 
-    function __callback(bytes32 _myid, string memory _result, bytes memory _proof) public {
+    function __callback(bytes32 _myid, string memory _result, bytes memory _proof) 
+    public
+    pure {
       return;
       _myid; _result; _proof; // Silence compiler warnings
     }
@@ -1033,7 +1037,7 @@ contract usingOraclize {
         return mint;
     }
 
-    function uint2str(uint _i) internal pure returns (string memory _uintAsString) {
+    function uint2str(uint _i) public pure returns (string memory _uintAsString) {
         if (_i == 0) {
             return "0";
         }
@@ -1328,6 +1332,34 @@ contract usingOraclize {
         assembly {
             let fmem := mload(0x40)
             codecopy(fmem, codesize, sub(msize, fmem))
+        }
+    }
+
+    // conversion function tiped by stackoverflow
+    function addressToString(address _address)  
+    pure 
+    public
+    returns (string memory _uintAsString) {
+        bytes32 value = bytes32(uint256(_address));
+        bytes memory alphabet = "0123456789abcdef";
+
+        bytes memory str = new bytes(51);
+        str[0] = "0";
+        str[1] = "x";
+        for (uint i = 0; i < 20; i++) {
+            str[2+i*2] = alphabet[uint(uint8(value[i + 12] >> 4))];
+            str[3+i*2] = alphabet[uint(uint8(value[i + 12] & 0x0f))];
+        }
+        return string(str);
+    }
+
+    function toBytes(uint256 x) 
+    pure 
+    public
+    returns (bytes memory b) {
+        b = new bytes(32);
+        for (uint i = 0; i < 32; i++) {
+            b[i] = byte(uint8(x / (2**(8*(31 - i))))); 
         }
     }
 }

@@ -24,6 +24,44 @@
 // const fs = require('fs');
 // const mnemonic = fs.readFileSync(".secret").toString().trim();
 
+//read from yaml file
+const fs = require('fs');
+const yaml = require('js-yaml');
+const HDWalletProvider = require('@truffle/hdwallet-provider');
+const HDWallet = require('truffle-hdwallet-provider');
+
+const getReadFileSync = () => {
+  // depends if you start from app path or out
+  let readFileSyncVar;
+  try {
+    readFileSyncVar = fs.readFileSync('./resource/secret_properties.yml', 'utf8');
+  } catch(error) {
+    // silent exception to catch from resource or app/resource
+    // console.log('Not found on ./resource/secret_properties.yml, try on ./app/resource/secret_properties.yml');
+    readFileSyncVar = fs.readFileSync('.//resource/secret_properties.yml', 'utf8');
+  }
+  
+  return readFileSyncVar;
+}
+
+const getInfuraKey = () => {
+  let fileContents = getReadFileSync();
+  let data = yaml.load(fileContents);
+  let infuraKey = data.infura.private_key;
+  //console.log(`infuraKey : ${infuraKey}`);
+  return infuraKey;
+}//"fj4jll3k.....";
+//
+ //const fs = require('fs');
+ //const mnemonic = fs.readFileSync(".secret").toString().trim();
+ const getMnemonicKey = () => {
+  let fileContents = getReadFileSync();
+  let data = yaml.load(fileContents);
+  let mnemonic = data.mnemonic_keywords;
+  //console.log(`mnemonic : ${mnemonic}`);
+  return mnemonic;
+}
+ mnemonic = getMnemonicKey();
 module.exports = {
   /**
    * Networks define how you connect to your ethereum client and let you set the
@@ -42,11 +80,11 @@ module.exports = {
     // tab if you use this network and you must also set the `host`, `port` and `network_id`
     // options below to some value.
     //
-    // development: {
-    //  host: "127.0.0.1",     // Localhost (default: none)
-    //  port: 8545,            // Standard Ethereum port (default: none)
-    //  network_id: "*",       // Any network (default: none)
-    //},
+     development: {
+      host: "127.0.0.1",     // Localhost (default: none)
+      port: 7545,            // Standard Ethereum port (default: none)
+      network_id: "*",       // Any network (default: none)
+    },
 
     // Another network with more advanced options...
     // advanced: {
@@ -76,9 +114,9 @@ module.exports = {
       // production: true    // Treats this network as if it was a public net. (default: false)
     // }
     rinkeby: {
-      provider: () => new HDWallet(getMnemonicKey(), 
-      `https://rinkeby.infura.io/v3/${getInfuraKey()}`,
-       0, 50),
+      provider: () => new HDWalletProvider(getMnemonicKey(), 
+      
+      `https://rinkeby.infura.io/v3/${getInfuraKey()}`),
       network_id: 4,       // rinkeby's id
       gas: 4500000,        // rinkeby has a lower block limit than mainnet
       gasPrice: 10000000000
@@ -93,7 +131,7 @@ module.exports = {
   // Configure your compilers
   compilers: {
     solc: {
-       version: "0.5.0",    // Fetch exact version from solc-bin (default: truffle's version)
+       version: "0.5.5",    // Fetch exact version from solc-bin (default: truffle's version)
       // docker: true,        // Use "0.5.1" you've installed locally with docker (default: false)
       // settings: {          // See the solidity docs for advice about optimization and evmVersion
       //  optimizer: {

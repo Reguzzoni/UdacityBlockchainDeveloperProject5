@@ -1,5 +1,5 @@
 # zokrates
-docker run -v D:/blockchain/UdacityBlockchainDeveloper/Project5/zokrates/code/:/home/zokrates/code -ti zokrates/zokrates /bin/bash
+docker run -v D:/blockchain/UdacityBlockchainDeveloper/Project5/zokrates/code:/home/zokrates/code -ti zokrates/zokrates /bin/bash
 
 D:\blockchain\UdacityBlockchainDeveloper\Project5
 # Udacity Blockchain Capstone
