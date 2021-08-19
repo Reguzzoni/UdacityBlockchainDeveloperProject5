@@ -163,7 +163,18 @@ https://testnets.opensea.io/assets/0x428b65b63cd3ac5e063a982d649058174cd848f8/9
 https://testnets.opensea.io/assets/0x428b65b63cd3ac5e063a982d649058174cd848f8/10
 
 
-# TESTS
+## Sold and bought with another accounts
+
+https://testnets.opensea.io/assets/0x428b65b63cd3ac5e063a982d649058174cd848f8/1
+
+https://testnets.opensea.io/assets/0x428b65b63cd3ac5e063a982d649058174cd848f8/2
+
+https://testnets.opensea.io/assets/0x428b65b63cd3ac5e063a982d649058174cd848f8/3
+
+https://testnets.opensea.io/assets/0x428b65b63cd3ac5e063a982d649058174cd848f8/4
+
+
+# image trade
 ![Alt text](eth-contracts/resource/trade_history_opensea.png?raw=true "trade_history_opensea")
 
 
