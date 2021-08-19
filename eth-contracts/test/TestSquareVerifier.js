@@ -34,8 +34,8 @@ contract('TestSquareVerifier', accounts => {
                     "c":["0x160bd6d7f5dd1a4550afc07458290cbeb1e7d58690ebebc7465be07ec34fff63",
                     "0x1c35d364eaae8a48fb1b5b5372c63edd712935e215048fd94b105c7fdb63491a"
                 ]*/
-                console.log(`Proof.input ${JSON.stringify(Proof.inputs)}`)
-                console.log("Proof.proof : ", Proof.proof.a, "\n", Proof.proof.b, "\n", Proof.proof.c)
+                //console.log(`Proof.input ${JSON.stringify(Proof.inputs)}`)
+                //console.log("Proof.proof : ", Proof.proof.a, "\n", Proof.proof.b, "\n", Proof.proof.c)
                 /*
                     function verifyTx(
                     uint[2] memory a,

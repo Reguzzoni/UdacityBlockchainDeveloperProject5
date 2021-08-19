@@ -39,29 +39,38 @@ const getReadFileSync = () => {
     // silent exception to catch from resource or app/resource
     // console.log('Not found on ./resource/secret_properties.yml, try on ./app/resource/secret_properties.yml');
     readFileSyncVar = fs.readFileSync('.//resource/secret_properties.yml', 'utf8');
+    
   }
   
   return readFileSyncVar;
 }
 
 const getInfuraKey = () => {
-  let fileContents = getReadFileSync();
-  let data = yaml.load(fileContents);
-  let infuraKey = data.infura.private_key;
-  //console.log(`infuraKey : ${infuraKey}`);
-  return infuraKey;
+  try{
+    let fileContents = getReadFileSync();
+    let data = yaml.load(fileContents);
+    let infuraKey = data.infura.project_id;
+    return infuraKey;
+  } catch(error) {
+    console.log("Problem with secret properties, return it manually");
+    return "";
+  }
 }//"fj4jll3k.....";
 //
  //const fs = require('fs');
  //const mnemonic = fs.readFileSync(".secret").toString().trim();
  const getMnemonicKey = () => {
-  let fileContents = getReadFileSync();
-  let data = yaml.load(fileContents);
-  let mnemonic = data.mnemonic_keywords;
-  //console.log(`mnemonic : ${mnemonic}`);
-  return mnemonic;
+  try{
+    let fileContents = getReadFileSync();
+    let data = yaml.load(fileContents);
+    let mnemonic = data.mnemonic_keywords;
+    return mnemonic;
+  } catch(error) {
+    console.log("Problem with secret properties, return it manually");
+    return "";
+  }
 }
- mnemonic = getMnemonicKey();
+
 module.exports = {
   /**
    * Networks define how you connect to your ethereum client and let you set the
@@ -80,10 +89,12 @@ module.exports = {
     // tab if you use this network and you must also set the `host`, `port` and `network_id`
     // options below to some value.
     //
-     development: {
+    development: {
       host: "127.0.0.1",     // Localhost (default: none)
       port: 7545,            // Standard Ethereum port (default: none)
       network_id: "*",       // Any network (default: none)
+      gas: 6721975, 
+      gasPrice: 20000000000, //From ganache-cli output
     },
 
     // Another network with more advanced options...
@@ -114,12 +125,16 @@ module.exports = {
       // production: true    // Treats this network as if it was a public net. (default: false)
     // }
     rinkeby: {
-      provider: () => new HDWalletProvider(getMnemonicKey(), 
-      
-      `https://rinkeby.infura.io/v3/${getInfuraKey()}`),
+      provider: () => new HDWalletProvider(
+        getMnemonicKey(), 
+        `https://rinkeby.infura.io/v3/${getInfuraKey()}`
+      ),
       network_id: 4,       // rinkeby's id
-      gas: 4500000,        // rinkeby has a lower block limit than mainnet
-      gasPrice: 10000000000
+      gas: 6721975,        // rinkeby has a lower block limit than mainnet
+      gasPrice: 20000000000,
+      //confirmations: 2,
+      timeoutBlocks: 200,  // # of blocks before a deployment times out  (minimum/default: 50)
+      skipDryRun: true
     }
   },
 

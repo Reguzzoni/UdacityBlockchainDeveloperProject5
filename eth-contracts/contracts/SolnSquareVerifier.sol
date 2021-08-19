@@ -1,6 +1,5 @@
 pragma solidity >=0.4.21 <0.6.0;
 
-import "./Oraclize.sol";
 import "./ERC721Mintable.sol";
 
 // TODO define a contract call to the zokrates generated solidity contract <Verifier> or <renamedVerifier>
@@ -8,7 +7,7 @@ import "./SquareVerifier.sol";
 
 contract VerifierZn is SquareVerifier {
     
-    event VerifiedZnEvent (address owner);
+    /*event VerifiedZnEvent (address owner);
 
     function verifyZnTx(
         address owner,
@@ -28,7 +27,7 @@ contract VerifierZn is SquareVerifier {
         }
 
         return isVerified;
-    }
+    }*/
 }
 
 
@@ -36,14 +35,14 @@ contract VerifierZn is SquareVerifier {
 contract SolnSquareVerifier is ERC721MintableComplete {
     using SafeMath for uint256;
 
-    SquareVerifier public verifierContract;
+    VerifierZn public verifierContract;
 
     // TODO define a solutions struct that can hold an index & an address
     struct Solution {
         uint index;
         address owner;
     }
-    uint countSolution = 0;
+    uint _countSolution = 0;
 
     // as flight surety project address is not the key and link with uint -> key -> Solution with double map
     // TODO define an array of the above struct
@@ -56,9 +55,13 @@ contract SolnSquareVerifier is ERC721MintableComplete {
     event AddedSolutionEvent(address addressSolution);
 
     constructor(
-        address verifierAddress
-    ) public {
-        verifierContract = SquareVerifier(verifierAddress);
+        address verifierAddress,
+        string memory tokenName,
+        string memory tokenSymbol
+    ) 
+    ERC721MintableComplete(tokenName, tokenSymbol)
+    public {
+        verifierContract = VerifierZn(verifierAddress);
     }
 
     function _getSolutionKey(
@@ -74,24 +77,60 @@ contract SolnSquareVerifier is ERC721MintableComplete {
     }
 
     // TODO Create a function to add the solutions to the array and emit the event
-    function _addSolution(
+    function addSolution(
         address owner,
         uint[2] memory a,
         uint[2][2] memory b,
         uint[2] memory c,
         uint[2] memory inputs
-    ) internal 
+    ) public 
     {
         bytes32 solutionKey = _getSolutionKey(a,b,c,inputs);
 
-        countSolution = countSolution.add(1);
+        _countSolution = _countSolution.add(1);
 
         _mapSolution[solutionKey].owner = owner;
-        _mapSolution[solutionKey].index = countSolution;
+        _mapSolution[solutionKey].index = _countSolution;
 
-        _mapLookupSolution[countSolution] = solutionKey;
+        _mapLookupSolution[_countSolution] = solutionKey;
 
         emit AddedSolutionEvent(owner);
+    }
+
+    function getSolutionInfoByCount(
+        uint256 countSolution
+    ) 
+    public
+    view 
+    returns (string memory){
+        bytes32 key = _mapLookupSolution[countSolution];
+        string memory index = uint2str(_mapSolution[key].index);
+        string memory owner = addressToString(_mapSolution[key].owner);
+        return strConcat(
+            " index : ", index, 
+            " owner : ", owner);
+    }
+
+    function getOwnerByCount(
+        uint256 countSolution
+    ) 
+    public
+    view 
+    returns (string memory){
+        bytes32 key = _mapLookupSolution[countSolution];
+        string memory owner = addressToString(_mapSolution[key].owner);
+        return owner;
+    }
+
+    function getIndexByCount(
+        uint256 countSolution
+    ) 
+    public
+    view 
+    returns (string memory){
+        bytes32 key = _mapLookupSolution[countSolution];
+        string memory index = uint2str(_mapSolution[key].index);
+        return index;
     }
 
 
@@ -113,14 +152,13 @@ contract SolnSquareVerifier is ERC721MintableComplete {
 
         //  - make sure you handle metadata as well as tokenSuplly
         require(verifierContract.verifyTx(
-                //owner,
                 a,
                 b,
                 c,
                 inputs), 
             "Solution isn't correct.");
 
-        _addSolution(
+        addSolution(
             owner, 
             a,
             b,
