@@ -39,7 +39,7 @@ contract('TestERC721Mintable', accounts => {
                     "https://s3-us-west-2.amazonaws.com/udacity-blockchain/capstone/",
                     {from: account_one}
                 );
-                console.log("Success minted tokenId ", tokenId_one);
+                //DEBUG console.log("Success minted tokenId ", tokenId_one);
                 
                 success = await this.contract.mint(
                     account_two,
@@ -47,7 +47,7 @@ contract('TestERC721Mintable', accounts => {
                     "https://s3-us-west-2.amazonaws.com/udacity-blockchain/capstone/",
                     {from: account_one}
                 );
-                console.log("Success minted tokenId ", tokenId_two);
+                //DEBUG console.log("Success minted tokenId ", tokenId_two);
                 
                 success = await this.contract.mint(
                     account_three,
@@ -55,7 +55,7 @@ contract('TestERC721Mintable', accounts => {
                     "https://s3-us-west-2.amazonaws.com/udacity-blockchain/capstone/",
                     {from: account_one}
                 );
-                console.log("Success minted tokenId ", tokenId_three);
+                //DEBUG console.log("Success minted tokenId ", tokenId_three);
 
             } catch (error) {
                 throw ("Error into _mint function : ", error);
@@ -66,51 +66,51 @@ contract('TestERC721Mintable', accounts => {
             let balanceOwner2 = await this.contract.balanceOf(account_two);
             let balanceOwner3 = await this.contract.balanceOf(account_three);
 
-            console.log('balanceOwner1 : ', balanceOwner1)
-            console.log('balanceOwner2 : ', balanceOwner2)
-            console.log('balanceOwner3 : ', balanceOwner3)*/
+            //DEBUG console.log('balanceOwner1 : ', balanceOwner1)
+            //DEBUG console.log('balanceOwner2 : ', balanceOwner2)
+            //DEBUG console.log('balanceOwner3 : ', balanceOwner3)*/
 
-            console.log("Contract mint finished");
+            //DEBUG console.log("Contract mint finished");
 
         })
 
         it('1 - should return total supply', async function () { 
-            console.log("test 1");
+            //DEBUG console.log("test 1");
             let totSupply = 0;
             try {
                 totSupply = await this.contract.totalSupply.call({from: account_one});
             } catch(error) {
-                console.log("Error into return total supply : ", error);
+                //DEBUG console.log("Error into return total supply : ", error);
             }
 
-            console.log("totSupply : ", totSupply);
+            //DEBUG console.log("totSupply : ", totSupply);
             
             assert.equal(totSupply, 3, "Incorrect supply");
         })
 
         it('2 - should get token balance', async function () { 
-            console.log("test 2");
+            //DEBUG console.log("test 2");
             let tokenBalance = 0;
             try {
                 tokenBalance = await this.contract.balanceOf(account_one);
             } catch(error) {
-                console.log("Error into return tokenBalance : ", error)
+                //DEBUG console.log("Error into return tokenBalance : ", error)
             }
 
-            console.log("tokenBalance : ", tokenBalance);
+            //DEBUG console.log("tokenBalance : ", tokenBalance);
         })
 
         // token uri should be complete i.e: https://s3-us-west-2.amazonaws.com/udacity-blockchain/capstone/1
         it('3 - should return token uri', async function () { 
-            console.log("test 3");
+            //DEBUG console.log("test 3");
             let tokenURI;
             try {
                 tokenURI = await this.contract.tokenURI(tokenId_one);
             } catch(error) {
-                console.log("Error into return tokenURI : ", error);
+                //DEBUG console.log("Error into return tokenURI : ", error);
             }
 
-            console.log("tokenURI : ", tokenURI);
+            //DEBUG console.log("tokenURI : ", tokenURI);
             
             assert.equal(tokenURI, 
                 "https://s3-us-west-2.amazonaws.com/udacity-blockchain/capstone/"+tokenId_one, 
@@ -118,13 +118,13 @@ contract('TestERC721Mintable', accounts => {
         })
 
         it('4 - should transfer token from one owner to another', async function () { 
-            console.log("test4");
+            //DEBUG console.log("test4");
             let contractOwner ;
             try {
-                console.log(account_one,account_two,tokenId_one);
+                //DEBUG console.log(account_one,account_two,tokenId_one);
 
                 contractOwner = await this.contract.ownerOf(tokenId_one);
-                console.log("before contractOwner : ", contractOwner);
+                //DEBUG console.log("before contractOwner : ", contractOwner);
 
                 await this.contract.transferFrom(
                     account_one,
@@ -138,12 +138,12 @@ contract('TestERC721Mintable', accounts => {
                 contractOwner = await this.contract.ownerOf(tokenId_one);
                 
             } catch(error) {
-                console.log("Error into transferFrom ", error);
-                console.log("Contract mined! Address: " + this.contract.address);
+                //DEBUG console.log("Error into transferFrom ", error);
+                //DEBUG console.log("Contract mined! Address: " + this.contract.address);
             } 
 
-            console.log("after contractOwner : ", contractOwner);
-            console.log("account_two : ", account_two);
+            //DEBUG console.log("after contractOwner : ", contractOwner);
+            //DEBUG console.log("account_two : ", account_two);
 
             assert.equal(contractOwner, 
                 account_two, 
@@ -160,7 +160,7 @@ contract('TestERC721Mintable', accounts => {
         })
 
         it('5 - should fail to mint when address is not contract owner', async function () { 
-            console.log("test 5");
+            //DEBUG console.log("test 5");
             try {
                 await this.contract.mint(
                     account_two, 
@@ -169,19 +169,19 @@ contract('TestERC721Mintable', accounts => {
                     {
                         from: account_four
                     });
-                console.log("Success minted tokenId ", tokenId_four);
+                //DEBUG console.log("Success minted tokenId ", tokenId_four);
 
             } catch (error) {
-                //console.log ("As expected : Error into _mint function : ", error);
+                ////DEBUG console.log ("As expected : Error into _mint function : ", error);
             }
 
             let contractOwner;
             contractOwner = await this.contract.ownerOf(tokenId_three);
-            console.log("contractOwner : ", contractOwner);
+            //DEBUG console.log("contractOwner : ", contractOwner);
         })
 
         it('6 - should return contract owner', async function () { 
-            console.log("test 6");
+            //DEBUG console.log("test 6");
             let contractOwner = 0;
             try {
                 await this.contract.mint(
@@ -192,9 +192,9 @@ contract('TestERC721Mintable', accounts => {
                 );
 
                 contractOwner = await this.contract.ownerOf(tokenId_three);
-                console.log("contractOwner : ", contractOwner);
+                //DEBUG console.log("contractOwner : ", contractOwner);
             } catch(error) {
-                console.log("Error into return contractOwner : ", error)
+                //DEBUG console.log("Error into return contractOwner : ", error)
             }
 
             assert.equal(contractOwner, 

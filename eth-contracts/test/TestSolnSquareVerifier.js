@@ -13,23 +13,23 @@ contract('TestSolnSquareVerifier', accounts => {
         beforeEach(async function () {
             let verifierContract;
 
-            console.log(
-                "start new contract Verifier");
+            //DEBUG console.log(
+            //DEBUG    "start new contract Verifier");
             verifierContract = await Verifier.new({
                 from: account_one
             });
-            console.log("Finished new contract Verifier");
+            //DEBUG console.log("Finished new contract Verifier");
 
-            console.log(
-                "start new contract SolnSquareVerifier with verifier ",
-                verifierContract.address);
+            //DEBUG console.log(
+            //DEBUG    "start new contract SolnSquareVerifier with verifier ",
+            //DEBUG   verifierContract.address);
 
             this.solnSquareVerifierContact = await SolnSquareVerifier.new(
                 verifierContract.address, "ERC721MintableToken", "TKN", {
                 from: account_one
             }
             );
-            console.log("finished new contract SolnSquareVerifier");
+            //DEBUG console.log("finished new contract SolnSquareVerifier");
         });
 
         // Test if a new solution can be added for contract - SolnSquareVerifier
@@ -37,8 +37,8 @@ contract('TestSolnSquareVerifier', accounts => {
             let infoSolution;
 
             try {
-                //console.log(`Proof.input ${JSON.stringify(Proof.inputs)}`)
-                //console.log("Proof.proof : ", Proof.proof.a, "\n", Proof.proof.b, "\n", Proof.proof.c)
+                ////DEBUG console.log(`Proof.input ${JSON.stringify(Proof.inputs)}`)
+                ////DEBUG console.log("Proof.proof : ", Proof.proof.a, "\n", Proof.proof.b, "\n", Proof.proof.c)
 
                 await this.solnSquareVerifierContact.addSolution(
                     account_two,
@@ -56,9 +56,9 @@ contract('TestSolnSquareVerifier', accounts => {
                     await this.solnSquareVerifierContact
                         .getSolutionInfoByCount(1);
 
-                console.log("infoSolution ", infoSolution);
+                //DEBUG console.log("infoSolution ", infoSolution);
             } catch (error) {
-                console.log("error into add solution", error);
+                //DEBUG console.log("error into add solution", error);
             }
 
             let tokenId =
@@ -75,8 +75,8 @@ contract('TestSolnSquareVerifier', accounts => {
 
             let contractOwner;
             try {
-                //console.log(`Proof.input ${JSON.stringify(Proof.inputs)}`)
-                //console.log("Proof.proof : ", Proof.proof.a, "\n", Proof.proof.b, "\n", Proof.proof.c)
+                ////DEBUG console.log(`Proof.input ${JSON.stringify(Proof.inputs)}`)
+                ////DEBUG console.log("Proof.proof : ", Proof.proof.a, "\n", Proof.proof.b, "\n", Proof.proof.c)
                 /*
                 function mintNewNFT(
                     address owner,
@@ -100,10 +100,10 @@ contract('TestSolnSquareVerifier', accounts => {
                 );
 
                 contractOwner = await this.solnSquareVerifierContact.ownerOf(tokenId_one);
-                console.log("contractOwner : ", contractOwner);
+                //DEBUG console.log("contractOwner : ", contractOwner);
 
             } catch (error) {
-                console.log("error into add solution", error);
+                //DEBUG console.log("error into add solution", error);
             }
 
             assert.equal(contractOwner, 
@@ -131,11 +131,11 @@ contract('TestSolnSquareVerifier', accounts => {
 
 
             } catch (error) {
-                console.log("error into add solution", error);
+                //DEBUG console.log("error into add solution", error);
             }
 
-            console.log("name :" + name)
-            console.log("symbol :" + symbol)
+            //DEBUG console.log("name :" + name)
+            //DEBUG console.log("symbol :" + symbol)
 
             assert.equal(name, 
                 "ERC721MintableToken", 
