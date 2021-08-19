@@ -10,6 +10,10 @@ Web3.js v1.2.1
 
 
 
+### ABI to interact with contract into file 
+ABI.md and content file SolnSquareVerifier.json at end of this file
+
+
 ### How to mint openSea collection?
 
 With myEthereumWallet or just use local scripts/mint.js (configuring infura and mnemonic) into file
@@ -83,7 +87,7 @@ https://testnets.opensea.io/assets/0xc405d76442de300566b15432c8f7ce808b753725/5
 https://testnets.opensea.io/assets/0xc405d76442de300566b15432c8f7ce808b753725/1
 
 # TESTS
-![Alt text](resource/trade_history_opensea.png?raw=true "trade_history_opensea")
+![Alt text](eth-contracts/resource/trade_history_opensea.png?raw=true "trade_history_opensea")
 
 
 ## zokrates docker
