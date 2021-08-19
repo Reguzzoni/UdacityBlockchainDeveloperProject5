@@ -10,9 +10,6 @@ Web3.js v1.2.1
 
 
 
-## Test instructions
-
-
 # Install dependencies
 
 npm install
@@ -28,7 +25,8 @@ cd eth-contracts
 Start ganache and deploy contracts in local with : "truffle deploy --network deployment --reset" to ganache (127.0.0.1:7555) 
 
 
-### TEST
+### TEST INSTRUCTIONS
+
 
 ## How run test
 
@@ -62,7 +60,7 @@ It's used to test contract ERC721Mintable contract!
 # TestSquareVerifier.js
 
 It's used to test contract SquareVerifier contract! Remember that SquareVerifier is been producted by zokrates following the guide https://classroom.udacity.com/nanodegrees/nd1309/parts/36b45ada-c0e5-495e-b6cc-34ea14a18d61/modules/996c54f8-4fa5-4eee-98c3-25788c8a5fc5/lessons/d35b025b-01b3-4bd9-acf5-e8bb5b88f00c/concepts/a431480a-c27c-437d-a911-8d442d2c8624
-(I recalled verifier.sol to SquareVerifier.sol to try to fix a problem with inheritance)
+(I renamed verifier.sol to SquareVerifier.sol to try to fix a problem with inheritance)
 
 - initialize verifier contract
   
@@ -82,6 +80,12 @@ Write test contract for ZK and ERC721 integration:
 - 2 - token can be minted : try to mint a new token with method mintNewNFT which will mint new token with relative owner, tokenId and It will use input proof to verify transaction
 
 - 3 - check tokenName and symbol : check if name and symbol are filled correctly
+
+
+### MARKETPLACE
+
+https://testnets.opensea.io/collection/erc721mintabletoken
+
 
 # IMAGE TEST
 ![Alt text](eth-contracts/resource/test_result.png?raw=true "test_result")
