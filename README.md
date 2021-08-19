@@ -19,9 +19,13 @@ as truffle-config for deploy
 
 ### Rinkeby information
 
-contractAddress SolnSquareVerifier:         0xe20Fe323F77553Daf2Cb9FB18B60586FEb231125
+contractAddress SolnSquareVerifier:         0xC405d76442De300566B15432C8f7ce808b753725
+transaction hash deploy SolnSquareVerifier:    0x317e48f5cf1879de583c990c111b9d492481b073eb71686a598118212bda84f7
 
-contractAddress SquareVerifier:             0x820959eBF420efeD5f500E5588d4f62Cd1d7a489
+
+contractAddress SquareVerifier:             0x83F4fbDB5BAdaf1E5f4F57a992FbECF5088Fc742
+transaction hash deploy SolnSquareVerifier:
+0x00be3f9280d2e5767a6dd043178b9c4defc2ff3291311d50331d99b77c5df758
 
 METAMASK address :                          0x030E42A9a18A0dE7207A17c1Fb68e84b9074878c
 
