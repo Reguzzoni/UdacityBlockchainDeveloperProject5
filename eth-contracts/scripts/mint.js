@@ -51,7 +51,7 @@ const INFURA_KEY = getInfuraKey();
 
 const FACTORY_CONTRACT_ADDRESS = process.env.FACTORY_CONTRACT_ADDRESS;
 
-const CONTRACT_ADDRESS = "0x36AA3d727c0AC6732DDF90FC7A9C889b7c6BD5FD";
+const CONTRACT_ADDRESS = "0xC405d76442De300566B15432C8f7ce808b753725";
 const OWNER_ADDRESS = "0x030E42A9a18A0dE7207A17c1Fb68e84b9074878c";
 const NETWORK = "rinkeby";
 
@@ -88,7 +88,7 @@ async function main() {
     // mint with zokratesProof
     for (let i = 0; i < zokratesProof.length ; i++) {
         try {
-            const tokenId = 2;
+            const tokenId = 1;
             const proofs = Object.values(zokratesProof[i].proof);
             const inputs = zokratesProof[i].inputs;
             console.log("OWNER_ADDRESS "+ OWNER_ADDRESS + "\n");
@@ -106,7 +106,7 @@ async function main() {
     }
     // mint token without proof
     try {
-      const tokenId = 2;
+      const tokenId = 1;
       console.log("OWNER_ADDRESS " + OWNER_ADDRESS + "\n");
       let tx3 = await token.methods
         .mint(OWNER_ADDRESS, tokenId, "")
