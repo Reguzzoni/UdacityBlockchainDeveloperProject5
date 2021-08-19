@@ -545,12 +545,26 @@ contract ERC721Metadata is ERC721Enumerable {
         return _name;
     }
 
+    function name()
+    external
+    view
+    returns (string memory) {
+        return _name;
+    }
+
     function setName(string calldata name) 
     external {
         _name = name;
     }
 
     function getSymbol()
+    external
+    view
+    returns (string memory) {
+        return _symbol;
+    }
+
+    function symbol()
     external
     view
     returns (string memory) {
