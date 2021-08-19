@@ -36,8 +36,10 @@ transaction hash deploy SolnSquareVerifier:
 
 
 
-METAMASK address :                          0x030E42A9a18A0dE7207A17c1Fb68e84b9074878c
+METAMASK rinkeby address who created and listed :                          0x030E42A9a18A0dE7207A17c1Fb68e84b9074878c
 
+METAMASK rinkeby address who bought :
+0x5618972C79dD7495710E01833D5D615C3825d841
 
 
 ### Etherscan
@@ -85,6 +87,17 @@ https://testnets.opensea.io/assets/0xc405d76442de300566b15432c8f7ce808b753725/5
 ## Sold and Bought with different account on openSea, look at transaction history
 
 https://testnets.opensea.io/assets/0xc405d76442de300566b15432c8f7ce808b753725/1
+
+https://testnets.opensea.io/assets/0xc405d76442de300566b15432c8f7ce808b753725/2
+
+https://testnets.opensea.io/assets/0xc405d76442de300566b15432c8f7ce808b753725/3
+
+https://testnets.opensea.io/assets/0xc405d76442de300566b15432c8f7ce808b753725/4
+
+https://testnets.opensea.io/assets/0xc405d76442de300566b15432c8f7ce808b753725/5
+
+
+
 
 # TESTS
 ![Alt text](eth-contracts/resource/trade_history_opensea.png?raw=true "trade_history_opensea")
