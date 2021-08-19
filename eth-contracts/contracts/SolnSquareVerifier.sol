@@ -165,6 +165,6 @@ contract SolnSquareVerifier is ERC721MintableComplete {
             c,
             inputs);
 
-        super._mint(owner, tokenId);
+        super.mint(owner, tokenId);
     }
 }

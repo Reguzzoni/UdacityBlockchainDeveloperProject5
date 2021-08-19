@@ -26,7 +26,7 @@ contract('TestSolnSquareVerifier', accounts => {
 
             this.solnSquareVerifierContact = await SolnSquareVerifier.new(
                 verifierContract.address, "ERC721MintableToken", "TKN", {
-                from: account_one
+                from: account_two
             }
             );
             //DEBUG console.log("finished new contract SolnSquareVerifier");
@@ -87,6 +87,7 @@ contract('TestSolnSquareVerifier', accounts => {
                     uint[2] memory inputs
                 )
                 */
+                //console.log("before contractOwner : ", contractOwner);
                 await this.solnSquareVerifierContact.mintNewNFT(
                     account_two,
                     tokenId_one,
@@ -100,11 +101,19 @@ contract('TestSolnSquareVerifier', accounts => {
                 );
 
                 contractOwner = await this.solnSquareVerifierContact.ownerOf(tokenId_one);
-                //DEBUG console.log("contractOwner : ", contractOwner);
+                //console.log("contractOwner : ", contractOwner);
 
             } catch (error) {
-                //DEBUG console.log("error into add solution", error);
+                console.log("error into mintNewNFT", error);
             }
+            
+            let ownerOf;
+            ownerOf = await this.solnSquareVerifierContact.ownerOf(tokenId_one);
+            //console.log("ownerOf :" + ownerOf)
+
+            let tokenURI;
+            tokenURI = await this.solnSquareVerifierContact.tokenURI(tokenId_one);
+            //console.log("tokenURI :" + tokenURI)
 
             assert.equal(contractOwner, 
                 account_two, 
@@ -128,6 +137,8 @@ contract('TestSolnSquareVerifier', accounts => {
                         from: account_two
                     }
                 );
+
+                
 
 
             } catch (error) {

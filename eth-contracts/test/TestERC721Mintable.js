@@ -36,7 +36,6 @@ contract('TestERC721Mintable', accounts => {
                 success = await this.contract.mint(
                     account_one,
                     tokenId_one,
-                    "https://s3-us-west-2.amazonaws.com/udacity-blockchain/capstone/",
                     {from: account_one}
                 );
                 //DEBUG console.log("Success minted tokenId ", tokenId_one);
@@ -44,7 +43,6 @@ contract('TestERC721Mintable', accounts => {
                 success = await this.contract.mint(
                     account_two,
                     tokenId_two,
-                    "https://s3-us-west-2.amazonaws.com/udacity-blockchain/capstone/",
                     {from: account_one}
                 );
                 //DEBUG console.log("Success minted tokenId ", tokenId_two);
@@ -52,7 +50,6 @@ contract('TestERC721Mintable', accounts => {
                 success = await this.contract.mint(
                     account_three,
                     tokenId_three,
-                    "https://s3-us-west-2.amazonaws.com/udacity-blockchain/capstone/",
                     {from: account_one}
                 );
                 //DEBUG console.log("Success minted tokenId ", tokenId_three);
@@ -165,7 +162,6 @@ contract('TestERC721Mintable', accounts => {
                 await this.contract.mint(
                     account_two, 
                     tokenId_four,
-                    "https://s3-us-west-2.amazonaws.com/udacity-blockchain/capstone/",
                     {
                         from: account_four
                     });
@@ -187,8 +183,9 @@ contract('TestERC721Mintable', accounts => {
                 await this.contract.mint(
                     account_three,
                     tokenId_three,
-                    "https://s3-us-west-2.amazonaws.com/udacity-blockchain/capstone/",
-                    {from: account_one}
+                    {
+                        from: account_one
+                    }
                 );
 
                 contractOwner = await this.contract.ownerOf(tokenId_three);

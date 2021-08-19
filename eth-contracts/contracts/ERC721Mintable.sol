@@ -533,7 +533,7 @@ contract ERC721Metadata is ERC721Enumerable {
         // TODO: set instance var values
         _name = name;
         _symbol = symbol;
-        baseTokenURI = baseTokenURI;
+        _baseTokenURI = baseTokenURI;
         _registerInterface(_INTERFACE_ID_ERC721_METADATA);
     }
 
@@ -589,7 +589,11 @@ contract ERC721Metadata is ERC721Enumerable {
     }
 
     function tokenURI(uint256 tokenId) external view returns (string memory) {
-        require(_exists(tokenId));
+        require(
+            _exists(tokenId), 
+            strConcat("TokenId in tokenUri is not owned",
+            uint2str(tokenId))
+        );
         return _tokenURIs[tokenId];
     }
 
@@ -598,17 +602,16 @@ contract ERC721Metadata is ERC721Enumerable {
     // It should be the _baseTokenURI + the tokenId in string form
     // see https://github.com/oraclize/ethereum-api/blob/master/oraclizeAPI_0.5.sol for strConcat() 
     function setTokenURIToTokenId(
-        string memory baseTokenURI,
         uint256 tokenId
     ) 
     internal {
         // require the token exists before setting
-        require(_exists(tokenId));
+        require(_exists(tokenId), "TokenId is not owned");
         // TIP #2: you can also use uint2str() to convert a uint to a string
         // convert tokenId to string
         string memory stringTokenId = uint2str(tokenId);
         // TIP #1: use strConcat() from the imported oraclizeAPI lib to set the complete token URI
-        string memory urlCompleted = strConcat(baseTokenURI, stringTokenId);
+        string memory urlCompleted = strConcat(_baseTokenURI, stringTokenId);
         _tokenURIs[tokenId] = urlCompleted;
     }
 }
@@ -629,12 +632,12 @@ contract ERC721MintableComplete is ERC721Metadata {
     //      -takes in a 'to' address, tokenId, and tokenURI as parameters
     //      -returns a true boolean upon completion of the function
     //      -calls the superclass mint and setTokenURI functions
-    function mint(address to, uint256 tokenId, string memory tokenURI)
+    function mint(address to, uint256 tokenId)
     onlyOwner
     public 
     returns (bool){
         super._mint(to, tokenId);
-        super.setTokenURIToTokenId(tokenURI,tokenId);
+        super.setTokenURIToTokenId(tokenId);
         return true;
     }
 

@@ -51,7 +51,7 @@ const INFURA_KEY = getInfuraKey();
 
 const FACTORY_CONTRACT_ADDRESS = process.env.FACTORY_CONTRACT_ADDRESS;
 
-const CONTRACT_ADDRESS = "0xC405d76442De300566B15432C8f7ce808b753725";
+const CONTRACT_ADDRESS = "0x428b65b63CD3ac5E063A982d649058174cD848F8";
 const OWNER_ADDRESS = "0x030E42A9a18A0dE7207A17c1Fb68e84b9074878c";
 const NETWORK = "rinkeby";
 
@@ -106,23 +106,25 @@ async function main() {
     }
     // mint token without proof
     try {
-      const tokenId = 1;
+      const tokenId = 2;
       console.log("OWNER_ADDRESS " + OWNER_ADDRESS + "\n");
       let tx3 = await token.methods
-        .mint(OWNER_ADDRESS, tokenId, "")
+        .mint(OWNER_ADDRESS, tokenId)
         .send({ from: OWNER_ADDRESS });
 
       console.log("Minted item. Transaction: " + tx3.transactionHash);
     } catch (e) {
       console.log("error into minted function " + e);
     }
-
-    for(var countMint = 3; countMint<=5; countMint++){
+    // mint to 10 token without proof
+    for(var countMint = 3; countMint<=10; countMint++){
       try {
         const tokenId = countMint;
         console.log("OWNER_ADDRESS " + OWNER_ADDRESS + "\n");
         let tx = await token.methods
-          .mint(OWNER_ADDRESS, tokenId, "")
+          .mint(
+            OWNER_ADDRESS, 
+            tokenId)
           .send({ from: OWNER_ADDRESS });
   
         console.log("Minted item. Transaction: " + tx.transactionHash);
